@@ -1,4 +1,6 @@
 package telran.interview;
 
-public class Connection {
+public record Connection(String connectionId)
+{
+
 }

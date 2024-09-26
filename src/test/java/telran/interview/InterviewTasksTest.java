@@ -1,4 +1,11 @@
 package telran.interview;
 
-public class InterviewTasksTest {
+import org.junit.jupiter.api.Test;
+
+public class InterviewTasksTest
+{
+    @Test
+    void hasSumTwoTest() {
+        //TODO
+    }
 }
