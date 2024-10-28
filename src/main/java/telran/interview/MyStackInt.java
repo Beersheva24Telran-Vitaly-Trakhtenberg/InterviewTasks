@@ -1,34 +1,53 @@
 package telran.interview;
 
+import java.util.ArrayList;
+import java.util.EmptyStackException;
+
 public class MyStackInt
 {
-    public void push(int num) {
-        //TODO
-        //adds num into top of stack (last element)
-        throw new UnsupportedOperationException();
+    private ArrayList<Integer> stack = new ArrayList<>();
+    private ArrayList<Integer> maxStack = new ArrayList<>();
+
+    public void push(int num)
+    {
+        stack.add(num);
+        if (maxStack.isEmpty() || num >= maxStack.get(maxStack.size() - 1)) {
+            maxStack.add(num);
+        }
     }
-    public int pop() {
-        //TODO
-        //removes element from top of stack (last element)
-        //returns being removed number
-        //throws exception if the stack is empty
-        throw new UnsupportedOperationException();
+
+    public int pop()
+    {
+        if (isEmpty()) {
+            throw new EmptyStackException();
+        }
+
+        int num = stack.remove(stack.size() - 1);
+        if (num == maxStack.get(maxStack.size() - 1)) {
+            maxStack.remove(maxStack.size() - 1);
+        }
+
+        return num;
     }
+
     public int peek() {
-        //TODO
-        //returns last number
-        //throws exception if the stack is empty
-        throw new UnsupportedOperationException();
+        if (isEmpty()) {
+            throw new EmptyStackException();
+        }
+
+        return stack.get(stack.size() - 1);
     }
-    public boolean isEmpty() {
-        //TODO
-        //returns true if the stack is empty, otherwise false
-        throw new UnsupportedOperationException();
+
+    public boolean isEmpty()
+    {
+        return stack.isEmpty();
     }
-    public int getMaxElement() {
-        //TODO
-        //returns the max number from the stack
-        //throws exception if the stack is empty
-        throw new UnsupportedOperationException();
+
+    public int getMaxElement()
+    {
+        if (isEmpty()) {
+            throw new EmptyStackException();
+        }
+        return maxStack.get(maxStack.size() - 1);
     }
 }
