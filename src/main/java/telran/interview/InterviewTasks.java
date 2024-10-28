@@ -1,9 +1,7 @@
 package telran.interview;
 
 import java.time.LocalDate;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 
 public class InterviewTasks {
     /**
@@ -41,15 +39,34 @@ public class InterviewTasks {
         return res;
     }
 
+    /**
+     * @param rolesHistory
+     * @param dates
+     * @return List<DateRole> rolesHistory is the list containg dates and roles assigned to the employees at the appropriate dates
+     *  for example, date => 2019-01-01, role => Developer means that some employee (no matter who) was taken
+     *  role Developer at 2019-01-01
+     *  create List<DateRole> with roles matching with the given dates
+     *  most effective data structure
+     */
     public static List<DateRole> assignRoleDates(List<DateRole> rolesHistory,
                                                  List<LocalDate> dates) {
-        //TODO
-        //rolesHistory is the list containg dates and roles assigned to the employees at the appropriate dates
-        //for example, date => 2019-01-01, role => Developer means that some employee (no matter who) was taken
-        //role Developer at 2019-01-01
-        //create List<DateRole> with roles matching with the given dates
-        //most effective data structure
-        throw new UnsupportedOperationException();
+        TreeMap<LocalDate, String> roleMap = new TreeMap<>();
+        for (DateRole dateRole : rolesHistory) {
+            roleMap.put(dateRole.date(), dateRole.role());
+        }
+
+        List<DateRole> result = new ArrayList<>();
+
+        for (LocalDate date : dates) {
+            Map.Entry<LocalDate, String> entry = roleMap.floorEntry(date);
+            if (entry != null) {
+                result.add(new DateRole(date, entry.getValue()));
+            } else {
+                result.add(new DateRole(date, null));
+            }
+        }
+
+        return result;
     }
 
     /**
