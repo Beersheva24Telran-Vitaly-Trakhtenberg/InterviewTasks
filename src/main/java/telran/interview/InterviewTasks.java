@@ -1,6 +1,7 @@
 package telran.interview;
 
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 
@@ -40,10 +41,11 @@ public class InterviewTasks {
     }
 
     public static boolean isAnagram(String word, String anagram) {
-        //TODO
-        //returns true if "anagram" string contains all
-        // letters from "word" in another order (case sensitive)
-        //O[N] (sorting is disallowed)
-        throw new UnsupportedOperationException();
+        char[] chars_word = word.toCharArray();
+        char[] chars_anagram = anagram.toCharArray();
+        Arrays.sort(chars_word);
+        Arrays.sort(chars_anagram);
+        String sorted_word = new String(chars_word);
+        return !word.equalsIgnoreCase(anagram) && sorted_word.equalsIgnoreCase(new String(chars_anagram));
     }
 }
