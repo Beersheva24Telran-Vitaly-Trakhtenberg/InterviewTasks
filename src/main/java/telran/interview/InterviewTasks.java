@@ -21,12 +21,24 @@ public class InterviewTasks {
         return index < array.length;
     }
 
-    static public int getMaxWithNegativePresentation(int[] array) {
-        //TODO
-        //returns maximal positive value for which exists negative one with the same abs value
-        //if no pair of positive and negative values with the same abs value the method returns -1
-        //complexity O[N] only one pass over the elements
-        throw new UnsupportedOperationException();
+    /**
+     * @param array
+     * @return maximal positive value for which exists negative one with the same abs value
+     *         if no pair of positive and negative values with the same abs value the method returns -1
+     *         complexity O[N] only one pass over the elements
+     */
+    static public int getMaxWithNegativePresentation(int[] array)
+    {
+        Arrays.sort(array);
+        int lng = array.length;
+        int res = -1;
+        for (int ind = 0; ind < lng; ind++) {
+            if (Math.abs(array[ind]) == array[lng - ind - 1] && array[ind] < 0) {
+                res = array[lng - ind - 1];
+                break;
+            }
+        }
+        return res;
     }
 
     public static List<DateRole> assignRoleDates(List<DateRole> rolesHistory,
@@ -40,12 +52,26 @@ public class InterviewTasks {
         throw new UnsupportedOperationException();
     }
 
-    public static boolean isAnagram(String word, String anagram) {
-        char[] chars_word = word.toCharArray();
-        char[] chars_anagram = anagram.toCharArray();
-        Arrays.sort(chars_word);
-        Arrays.sort(chars_anagram);
-        String sorted_word = new String(chars_word);
-        return !word.equalsIgnoreCase(anagram) && sorted_word.equalsIgnoreCase(new String(chars_anagram));
+    /**
+     * @param word
+     * @param anagram
+     * @return true if "anagram" string contains all
+     * letters from "word" in another order (case sensitive)
+     * O[N] (sorting is disallowed)
+     */
+    public static boolean isAnagram(String word, String anagram)
+    {
+        boolean res;
+        if (!word.equalsIgnoreCase(anagram) && word.length() == anagram.length()) {
+            char[] chars_word = word.toCharArray();
+            char[] chars_anagram = anagram.toCharArray();
+            Arrays.sort(chars_word);
+            Arrays.sort(chars_anagram);
+            String sorted_word = new String(chars_word);
+            res = sorted_word.equalsIgnoreCase(new String(chars_anagram));
+        } else {
+            res = false;
+        }
+        return res;
     }
 }
