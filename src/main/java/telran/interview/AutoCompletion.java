@@ -1,12 +1,10 @@
 package telran.interview;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 
 public class AutoCompletion
 {
-    private HashSet<String> words = new HashSet<>();
+    private LinkedHashSet<String> words = new LinkedHashSet<>();
 
     public boolean addWord(String word)
     {
@@ -21,6 +19,7 @@ public class AutoCompletion
                 variants.add(word);
             }
         }
-        return variants.reversed().toArray(new String[0]);
+        Collections.sort(variants, String.CASE_INSENSITIVE_ORDER);
+        return variants.toArray(new String[0]);
     }
 }
