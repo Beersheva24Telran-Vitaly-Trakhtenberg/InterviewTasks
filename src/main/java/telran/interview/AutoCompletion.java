@@ -14,8 +14,9 @@ public class AutoCompletion
     public String [] getVariants(String prefix)
     {
         List<String> variants = new ArrayList<>();
+        String lower_prefix = prefix.toLowerCase();
         for (String word : words) {
-            if (word.toLowerCase().startsWith(prefix.toLowerCase())) {
+            if (word.toLowerCase().startsWith(lower_prefix)) {
                 variants.add(word);
             }
         }
