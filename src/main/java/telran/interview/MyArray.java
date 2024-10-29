@@ -1,39 +1,42 @@
 package telran.interview;
 
-import java.lang.reflect.Array;
-import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MyArray<T>
 {
-    private T[] my_array;
+    private Map<Integer, T> myMap;
+    private int size;
+
+    public MyArray(int size)
+    {
+        if (size <= 0) {
+            throw new IllegalArgumentException("Size cannot be zero or less");
+        }
+        this.size = size;
+        myMap = new HashMap<>(size);
+    }
 
     public void setAll(T value)
     {
-        Arrays.fill(my_array, value);
+        for (int i = 0; i < size; i++) {
+            myMap.put(i, value);
+        }
     }
 
     public void set(int index, T value)
     {
-        if (index < 0 || index >= my_array.length) {
+        if (index < 0 || index >= size) {
             throw new ArrayIndexOutOfBoundsException("Index out of bounds: " + index);
         }
-
-        my_array[index] = value;
+        myMap.put(index, value);
     }
 
     public T get(int index)
     {
-        if (index < 0 || index >= my_array.length) {
+        if (index < 0 || index >= size) {
             throw new ArrayIndexOutOfBoundsException("Index out of bounds: " + index);
         }
-
-        return my_array[index];
-    }
-    public MyArray(int size)
-    {
-        if (size <= 0) {
-            throw new ArrayStoreException("Size cannot be zero or less");
-        }
-        my_array = (T[]) Array.newInstance(Object.class, size);
+        return myMap.get(index);
     }
 }
