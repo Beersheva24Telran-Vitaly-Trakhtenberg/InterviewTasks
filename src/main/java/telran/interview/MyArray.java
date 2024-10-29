@@ -5,8 +5,8 @@ import java.util.Map;
 
 public class MyArray<T>
 {
-    private Map<Integer, T> myMap;
-    private int size;
+    private final Map<Integer, T> myMap;
+    private final int size;
 
     public MyArray(int size)
     {
